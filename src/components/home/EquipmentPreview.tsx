@@ -1,47 +1,173 @@
-import { Link } from "react-router-dom";
-import AnimatedSection from "../AnimatedSection";
-import SpaceElement from "../elements/SpaceElement";
-import { Camera } from "lucide-react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
-const gear = [
-  "Sony Alpha Mark IV", "Sony FX3", "16-35mm G Master", "85mm G Master",
-  "35mm 1.4 Sony", "16mm Sigma", "24-70mm Kit", "Hollyland Mic",
-  "DJI Gimbal", "Godox TL60 LED",
+/* ─── Data ──────────────────────────────────────────────────── */
+const categories = [
+  {
+    num: "01",
+    name: "Camera Bodies",
+    tag: "Cinema-Grade",
+    // Unique gradient per block — gold/black palette only, varied direction & tone
+    bg: "radial-gradient(ellipse at 20% 80%, rgba(202,160,46,0.12) 0%, transparent 55%), linear-gradient(160deg, #0a0a0a 0%, #111108 100%)",
+    span: "lg:col-span-2 lg:row-span-2", // Featured large block
+  },
+  {
+    num: "02",
+    name: "Lenses",
+    tag: "G Master · Sigma Art",
+    bg: "radial-gradient(ellipse at 80% 20%, rgba(202,160,46,0.10) 0%, transparent 60%), linear-gradient(140deg, #0c0c0a 0%, #0a0a0a 100%)",
+    span: "lg:col-span-1",
+  },
+  {
+    num: "03",
+    name: "Audio",
+    tag: "Wireless · Studio",
+    bg: "radial-gradient(ellipse at 20% 20%, rgba(202,160,46,0.08) 0%, transparent 55%), linear-gradient(200deg, #0d0d0b 0%, #080808 100%)",
+    span: "lg:col-span-1",
+  },
+  {
+    num: "04",
+    name: "Stabilization",
+    tag: "DJI 3-Axis",
+    bg: "radial-gradient(ellipse at 50% 100%, rgba(202,160,46,0.10) 0%, transparent 60%), linear-gradient(120deg, #0a0a0a 0%, #0e0e0c 100%)",
+    span: "lg:col-span-1",
+  },
+  {
+    num: "05",
+    name: "Lighting",
+    tag: "Godox TL60",
+    bg: "radial-gradient(ellipse at 100% 50%, rgba(202,160,46,0.13) 0%, transparent 55%), linear-gradient(170deg, #0c0c09 0%, #080808 100%)",
+    span: "lg:col-span-1",
+  },
+  {
+    num: "06",
+    name: "Software & Brands",
+    tag: "Adobe · DaVinci · Sony",
+    bg: "radial-gradient(ellipse at 0% 50%, rgba(202,160,46,0.08) 0%, transparent 60%), linear-gradient(135deg, #0a0a0a 0%, #0d0d0a 100%)",
+    span: "lg:col-span-2",
+  },
 ];
 
+/* ─── Animation variants ─────────────────────────────────────── */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.09 } },
+};
+
+const blockVariants = {
+  hidden: { opacity: 0, scale: 0.96, y: 20 },
+  visible: {
+    opacity: 1, scale: 1, y: 0,
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+};
+
+/* ─── Component ──────────────────────────────────────────────── */
 const EquipmentPreview = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="cinema-section bg-cinema-darker relative overflow-hidden">
-      <SpaceElement />
-      <div className="max-w-7xl mx-auto relative z-10">
-        <AnimatedSection className="text-center mb-12">
-          <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">Rental Gear</p>
-          <h2 className="cinema-heading text-foreground">
-            Premium <span className="text-gold-gradient">Equipment</span>
-          </h2>
-        </AnimatedSection>
+    <section id="equipment-showcase" className="w-full overflow-hidden" style={{ background: "hsl(0 0% 3%)" }}>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {gear.map((item, i) => (
-            <AnimatedSection key={i} delay={i * 0.05}>
-              <div className="group p-6 border border-border/20 bg-card/30 hover:border-primary/30 hover:glow-gold transition-all duration-500 text-center">
-                <Camera size={28} className="mx-auto text-muted-foreground group-hover:text-primary transition-colors mb-3" />
-                <p className="text-xs tracking-wider text-foreground/80 group-hover:text-foreground transition-colors">{item}</p>
-              </div>
-            </AnimatedSection>
-          ))}
+      {/* ── Section Header ─────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        className="max-w-[1400px] mx-auto px-8 md:px-16 pt-24 md:pt-36 pb-14"
+      >
+        {/* Eyebrow */}
+        <div className="flex items-center gap-5 mb-6">
+          <div className="w-10 h-[1px] bg-primary" />
+          <span className="text-[11px] tracking-[0.55em] uppercase text-primary/70 font-semibold font-body">
+            Equipment
+          </span>
         </div>
+      </motion.div>
 
-        <AnimatedSection className="text-center mt-12">
-          <Link
-            to="/equipment"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-block text-xs tracking-[0.25em] uppercase border border-primary/40 px-8 py-3 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500"
-          >
-            Explore Rental Gear
-          </Link>
-        </AnimatedSection>
+      {/* ── Bento Staggered Grid ────────────────────────── */}
+      <div className="max-w-[1400px] mx-auto px-8 md:px-16 pb-20">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[240px] md:auto-rows-[280px] gap-3 md:gap-4"
+        >
+          {categories.map((cat) => (
+            <motion.div
+              key={cat.name}
+              variants={blockVariants}
+              onClick={() => navigate("/equipment")}
+              className={`group relative overflow-hidden cursor-pointer ${cat.span}`}
+              style={{ background: cat.bg }}
+            >
+              {/* Hover sweep overlay */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                   style={{ background: "linear-gradient(135deg, rgba(202,160,46,0.07) 0%, transparent 60%)" }} />
+
+              {/* Big BG number — top-right, very subtle */}
+              <span
+                className="absolute top-6 right-8 font-display font-black leading-none select-none text-primary/[0.06] group-hover:text-primary/[0.12] transition-colors duration-700 tracking-tighter"
+                style={{ fontSize: "clamp(5rem, 10vw, 9rem)" }}
+              >
+                {cat.num}
+              </span>
+
+              {/* Content — bottom left */}
+              <div className="absolute inset-x-0 bottom-0 p-8 md:p-10 flex flex-col gap-3">
+                {/* Expanding gold line */}
+                <div className="h-[1.5px] rounded-full bg-primary/40 w-8 group-hover:w-20 group-hover:bg-primary transition-all duration-700 ease-out" />
+
+                {/* Category name */}
+                <h3
+                  className="font-display uppercase text-foreground/70 group-hover:text-foreground transition-colors duration-500 leading-tight"
+                  style={{ fontSize: "clamp(1.4rem, 3vw, 2.2rem)", letterSpacing: "0.14em" }}
+                >
+                  {cat.name}
+                </h3>
+
+                {/* Tag — micro-copy slides in on hover */}
+                <div className="overflow-hidden max-h-0 group-hover:max-h-8 transition-all duration-700 ease-out opacity-0 group-hover:opacity-100">
+                  <span className="text-[9px] font-body font-medium tracking-[0.5em] uppercase text-primary/70">
+                    {cat.tag}
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom glow border */}
+              <div
+                className="absolute inset-x-0 bottom-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                style={{ background: "linear-gradient(to right, transparent, rgba(202,160,46,0.5), transparent)" }}
+              />
+
+              {/* Corner bracket */}
+              <div className="absolute top-5 left-6 w-6 h-6 border-t border-l border-primary/0 group-hover:border-primary/40 transition-all duration-700" />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
+
+      {/* ── CTA ─────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        className="flex justify-center pb-32 md:pb-48"
+      >
+        <button
+          onClick={() => navigate("/equipment")}
+          className="group relative flex items-center gap-4 px-10 py-4 border border-primary/40 text-primary hover:border-primary transition-all duration-700 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-primary/10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out" />
+          <span className="relative z-10 font-display text-sm tracking-[0.5em] uppercase">
+            Explore the Gear
+          </span>
+          <div className="relative z-10 w-6 h-[1px] bg-primary group-hover:w-10 transition-all duration-700" />
+        </button>
+      </motion.div>
     </section>
   );
 };
