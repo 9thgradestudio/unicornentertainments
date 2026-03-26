@@ -8,20 +8,21 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  // Stage 1: Logo visible (0-0.2)
-  // Stage 2: Logo zooms and fades (0.2-0.45)
-  // Stage 3: Text appears (0.45-0.85)
-  // Stage 4: Exit (0.85-1)
+  // Step 1: Tiny Scroll - Logo Zoom (0 - 0.1)
+  // Step 2: Tiny Scroll - Logo out, Text in (0.1 - 0.25)
+  // Step 3: Natural Scroll Away (0.25 - 1)
 
-  const logoScale = useTransform(scrollYProgress, [0, 0.2, 0.45], [1, 1, 2.5]);
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.2, 0.45], [1, 1, 0]);
-  const logoGlow = useTransform(scrollYProgress, [0, 0.25, 0.45], [0.3, 0.6, 0]);
+  // Logo zooms in very quickly, then gets "pushed" and fades out early
+  const logoScale = useTransform(scrollYProgress, [0, 0.1, 0.15], [1, 2.5, 4]);
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.1, 0.12], [1, 1, 0]);
+  const logoGlow = useTransform(scrollYProgress, [0, 0.1, 0.12], [0.3, 0.8, 0]);
 
-  const textOpacity = useTransform(scrollYProgress, [0.45, 0.55, 0.85, 0.95], [0, 1, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0.45, 0.55], [60, 0]);
+  // Text starts appearing right as logo fades out
+  const textOpacity = useTransform(scrollYProgress, [0.12, 0.2, 0.25, 0.4], [0, 1, 1, 0]);
+  const textY = useTransform(scrollYProgress, [0.12, 0.2], [40, 0]);
 
   return (
-    <section id="hero-section" ref={sectionRef} className="relative" style={{ height: "300vh" }}>
+    <section id="hero-section" ref={sectionRef} className="relative" style={{ height: "200vh" }}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Video background */}
         <div className="absolute inset-0">

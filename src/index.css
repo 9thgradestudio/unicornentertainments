@@ -5,9 +5,10 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  :root, html {
     --background: 0 0% 4%;
     --foreground: 40 20% 92%;
+    scroll-behavior: smooth;
 
     --card: 0 0% 7%;
     --card-foreground: 40 20% 92%;
