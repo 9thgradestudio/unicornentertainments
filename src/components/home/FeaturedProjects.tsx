@@ -1,7 +1,6 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
 const projects = [
   { id: 1, title: "The Silent Echo", category: "Film", color: "bg-zinc-900" },
@@ -37,62 +36,10 @@ const itemVariants = {
 
 const FeaturedProjects = () => {
   const navigate = useNavigate();
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Parallax for the fire background
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
-  const y3 = useTransform(scrollYProgress, [0, 1], ["0%", "-70%"]);
 
   return (
-    <section ref={containerRef} id="featured-work" className="relative w-full bg-black py-32 md:py-48 px-6 md:px-12 lg:px-20 overflow-hidden">
-      
-      {/* ── FIRE ELEMENT BACKGROUND ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Deep background heat */}
-        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#FF6B35]/30 via-transparent to-transparent" />
-        
-        {/* Animated glowing embers/heat blobs */}
-        <motion.div 
-          style={{ y: y1 }}
-          className="absolute -bottom-[20%] left-[10%] w-[800px] h-[800px] bg-[#FF5500]/50 rounded-full blur-[100px] mix-blend-screen"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.6, 0.9, 0.6],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        <motion.div 
-          style={{ y: y2 }}
-          className="absolute -bottom-[30%] right-[10%] w-[600px] h-[600px] bg-[#FF3300]/60 rounded-full blur-[80px] mix-blend-screen"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-            x: [0, 50, 0]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        <motion.div 
-          style={{ y: y3 }}
-          className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-[#FF6B35]/40 rounded-[100%] blur-[120px] mix-blend-screen"
-          animate={{ 
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        {/* Film grain overlay for cinematic feel over the fire */}
-        <div className="absolute inset-0 opacity-[0.08] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
-      </div>
-
-      <div className="max-w-[1600px] mx-auto relative z-10">
+    <section id="featured-work" className="w-full bg-black py-32 md:py-48 px-6 md:px-12 lg:px-20 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -115,7 +62,8 @@ const FeaturedProjects = () => {
                 </div>
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-90 group-hover:via-[#FF8C42]/10 transition-all duration-700" />
+              {/* Cinematic Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
               
               {/* Content Reveal */}
               <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">

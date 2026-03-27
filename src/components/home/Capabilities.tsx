@@ -1,6 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
 const capabilities = [
   { 
@@ -58,58 +57,9 @@ const itemVariants = {
 
 const Capabilities = () => {
   const navigate = useNavigate();
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Parallax for the water background
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   return (
-    <section ref={containerRef} id="capabilities" className="relative w-full bg-black py-32 md:py-48 overflow-hidden">
-      
-      {/* ── WATER ELEMENT BACKGROUND ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Deep ocean base */}
-        <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-[#005B96]/30 via-[#005B96]/10 to-transparent" />
-        
-        {/* Animated slow ripples (Caustics simulation via layered blurred blobs) */}
-        <motion.div 
-          style={{ y: y1 }}
-          className="absolute top-[10%] left-[-10%] w-[1200px] h-[800px] bg-[#00A8E8]/60 rounded-[100%] blur-[100px] mix-blend-screen"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.8, 0.5],
-            rotate: [0, 5, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        <motion.div 
-          style={{ y: y2 }}
-          className="absolute bottom-[20%] right-[-10%] w-[1000px] h-[800px] bg-[#005B96]/70 rounded-[100%] blur-[120px] mix-blend-screen"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.6, 0.9, 0.6],
-            rotate: [0, -5, 0]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        {/* Liquid surface reflection overlay */}
-        <motion.div 
-          className="absolute inset-0 mix-blend-overlay opacity-60"
-          style={{
-            background: "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.7) 0%, transparent 60%)",
-            y: y2
-          }}
-        />
-      </div>
-
+    <section id="capabilities" className="w-full bg-black py-32 md:py-48 overflow-hidden">
       <div className="max-w-7xl mx-auto px-8 mb-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -144,12 +94,12 @@ const Capabilities = () => {
             onClick={() => navigate("/services")}
             className="relative h-[60vh] md:h-[70vh] group cursor-pointer overflow-hidden border-r border-white/5 last:border-r-0"
           >
-            {/* Cinematic CSS Background with deep blue hover ripple */}
+            {/* Cinematic CSS Background */}
             <div className={`absolute inset-0 bg-gradient-to-br ${cap.gradient} transition-transform duration-[2000ms] ease-out group-hover:scale-110`}>
               {/* Noise Texture Overlay */}
               <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
-              {/* Secondary Color Glow & Water Ripple */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ${cap.secondaryColor} bg-[#00A8E8]/5 blur-3xl`} />
+              {/* Secondary Color Glow */}
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ${cap.secondaryColor} blur-3xl`} />
             </div>
 
             {/* Subtle Number Reveal */}

@@ -66,7 +66,7 @@ const HeroSection = () => {
             y: textY,
           }}
         >
-          From Vision to Visual Masterpiece.
+          From Vision to Visual <span className="italic font-display text-transparent bg-clip-text bg-gradient-to-br from-primary/80 to-primary drop-shadow-[0_0_15px_rgba(212,189,114,0.3)]">Masterpiece.</span>
         </motion.h2>
 
         {/* Scroll indicator */}

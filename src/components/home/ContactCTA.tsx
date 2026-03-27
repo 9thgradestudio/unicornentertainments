@@ -1,21 +1,8 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { useRef } from "react";
 
 const ContactCTA = () => {
-  const containerRef = useRef<HTMLElement>(null);
-
-  // Parallax for the Space background
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
-  const y3 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -25,48 +12,12 @@ const ContactCTA = () => {
 
   return (
     <section
-      ref={containerRef}
       id="contact-cta"
-      className="relative w-full py-32 md:py-40 bg-[#0A0A0D] overflow-hidden flex items-center justify-center border-t border-white/5"
+      className="relative w-full py-32 md:py-40 bg-black overflow-hidden flex items-center justify-center border-t border-white/5"
     >
-      {/* ── SPACE ELEMENT BACKGROUND ────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        
-        {/* Deep space nebula gradients */}
-        <motion.div 
-          style={{ y: y1 }}
-          className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#3D3D5C]/60 rounded-full blur-[100px] mix-blend-screen"
-        />
-        <motion.div 
-          style={{ y: y2 }}
-          className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/40 rounded-full blur-[100px] mix-blend-screen"
-        />
-        
-        {/* Static Starfield (using CSS radial gradients for massive performance) */}
-        <div 
-          className="absolute inset-0 opacity-80 mix-blend-screen"
-          style={{
-            backgroundImage: "radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 160px 120px, rgba(202,160,46,1), rgba(0,0,0,0))",
-            backgroundSize: "200px 200px"
-          }}
-        />
-
-        {/* Twinkling parallax stars overlay */}
-        <motion.div 
-          className="absolute inset-[-50%] mix-blend-screen"
-          style={{
-            y: y3,
-            backgroundImage: "radial-gradient(1.5px 1.5px at 50px 150px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 150px 50px, rgba(202,160,46,0.8), rgba(0,0,0,0))",
-            backgroundSize: "300px 300px"
-          }}
-          animate={{ opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        <div className="absolute inset-0 opacity-[0.08] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
-        
-        {/* Center vignette to pull focus to text */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0A0A0D_80%)] opacity-80" />
+      {/* ── Subdued Cinematic Background ────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
       </div>
 
       <div className="relative z-10 w-full max-w-4xl px-8 flex flex-col items-center text-center">

@@ -136,7 +136,7 @@ const Contact = () => {
                         <Mail size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs tracking-widest uppercase text-primary/70 mb-1">Email Us</span>
+                        <span className="text-xs tracking-widest uppercase text-primary mb-1">Email Us</span>
                         <span className="text-lg font-light text-[#F5F5F5] group-hover:text-primary transition-colors break-all">contact@unicornentertainments.com</span>
                       </div>
                     </a>
