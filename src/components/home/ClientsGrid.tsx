@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const industries = [
   { num: "01", name: "Film Industry",          copy: "Collaborating with visionaries"  },
@@ -27,14 +28,58 @@ const cardVariants = {
 
 const ClientsGrid = () => {
   const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Parallax for the Air/Mist background
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
 
   return (
-    <section id="clients-grid" className="w-full overflow-hidden bg-black relative py-32 md:py-48 z-10">
+    <section ref={containerRef} id="clients-grid" className="relative w-full overflow-hidden bg-black py-32 md:py-48 z-10">
       
-      {/* ── Ambient Background Texture ────────────────────────── */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-zinc-800/20 blur-[150px] rounded-full" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full" />
+      {/* ── AIR ELEMENT BACKGROUND ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+         {/* Subtle sky gradient base */}
+         <div className="absolute inset-0 bg-gradient-to-br from-[#E0F7FA]/5 via-transparent to-[#B3E5FC]/5 opacity-30" />
+         
+         {/* Drifting Mist Clouds via blurred blobs */}
+         <motion.div 
+           style={{ x: x1 }}
+           className="absolute top-[10%] left-[-20%] w-[1200px] h-[600px] bg-[#E0F7FA]/10 rounded-full blur-[140px] mix-blend-screen opacity-50"
+           animate={{ 
+             opacity: [0.3, 0.6, 0.3],
+             scale: [1, 1.1, 1],
+           }}
+           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+         />
+         
+         <motion.div 
+           style={{ x: x2 }}
+           className="absolute bottom-[20%] right-[-20%] w-[1000px] h-[800px] bg-[#B3E5FC]/10 rounded-full blur-[160px] mix-blend-screen opacity-40"
+           animate={{ 
+             opacity: [0.2, 0.5, 0.2],
+             scale: [1, 1.05, 1],
+           }}
+           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+         />
+         
+         {/* Additional slow floating cloud in center */}
+         <motion.div 
+           className="absolute top-[40%] left-[30%] w-[800px] h-[400px] bg-white/5 rounded-[100%] blur-[100px] mix-blend-screen opacity-30"
+           animate={{ 
+             y: [-20, 20, -20],
+             opacity: [0.2, 0.4, 0.2],
+           }}
+           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+         />
+         
+         {/* Film grain overlay for atmospheric texture */}
+         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
       </div>
 
       {/* ── Section Header ─────────────────────────────────── */}

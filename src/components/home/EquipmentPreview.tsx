@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 /* ─── Data ──────────────────────────────────────────────────── */
 const categories = [
@@ -65,22 +66,59 @@ const blockVariants = {
 /* ─── Component ──────────────────────────────────────────────── */
 const EquipmentPreview = () => {
   const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Parallax for the Earth/Stone background
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
-    <section id="equipment-showcase" className="w-full overflow-hidden" style={{ background: "hsl(0 0% 3%)" }}>
+    <section ref={containerRef} id="equipment-showcase" className="relative w-full overflow-hidden bg-black pb-32 md:pb-48">
+      
+      {/* ── EARTH ELEMENT BACKGROUND ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Deep earthy base */}
+        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#1A1512] via-[#0D0B0A] to-black opacity-90" />
+        
+        {/* SVG Noise Grain (High frequency stone texture) */}
+        <svg className="absolute w-0 h-0">
+          <filter id="stoneTexture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+            <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.05 0" />
+          </filter>
+        </svg>
+        <div className="absolute inset-0 opacity-[0.25] mix-blend-overlay" style={{ filter: 'url(#stoneTexture)' }} />
 
+        {/* Floating dust/debris (Slow earthy blobs) */}
+        <motion.div 
+          style={{ y: y1 }}
+          className="absolute top-[20%] left-[5%] w-[800px] h-[600px] bg-[#8D6E63]/15 rounded-full blur-[150px] mix-blend-screen opacity-40"
+        />
+        <motion.div 
+          style={{ y: y2 }}
+          className="absolute bottom-[10%] right-[10%] w-[1000px] h-[500px] bg-[#D7CCC8]/10 rounded-full blur-[140px] mix-blend-screen opacity-30"
+        />
+        
+        {/* Warm horizon glow */}
+        <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#8D6E63]/10 to-transparent mix-blend-screen" />
+      </div>
       {/* ── Section Header ─────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className="max-w-[1400px] mx-auto px-8 md:px-16 pt-24 md:pt-36 pb-14"
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-[1400px] mx-auto px-8 md:px-16 pt-24 md:pt-36 pb-14 relative z-10"
       >
         {/* Eyebrow */}
         <div className="flex items-center gap-6 mb-6">
           <div className="w-10 h-[1px] bg-primary/40" />
-          <span className="text-[11px] tracking-[0.55em] uppercase text-zinc-500 font-bold">
+          <span className="text-[11px] tracking-[0.55em] uppercase text-[#F5F5F5]/60 font-bold">
             Equipment
           </span>
         </div>
@@ -90,7 +128,7 @@ const EquipmentPreview = () => {
       </motion.div>
 
       {/* ── Bento Staggered Grid ────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 pb-20">
+      <div className="max-w-[1400px] mx-auto px-8 md:px-16 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -152,8 +190,6 @@ const EquipmentPreview = () => {
         </motion.div>
       </div>
 
-      {/* ── Actionless Bottom Spacing ────────────────────────── */}
-      <div className="pb-32 md:pb-48" />
     </section>
   );
 };
