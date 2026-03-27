@@ -75,15 +75,15 @@ const Capabilities = () => {
       {/* ── WATER ELEMENT BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Deep ocean base */}
-        <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-black via-[#005B96]/10 to-transparent opacity-80" />
+        <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-[#005B96]/30 via-[#005B96]/10 to-transparent" />
         
         {/* Animated slow ripples (Caustics simulation via layered blurred blobs) */}
         <motion.div 
           style={{ y: y1 }}
-          className="absolute top-[10%] left-[-10%] w-[1200px] h-[800px] bg-[#005B96]/20 rounded-[100%] blur-[120px] mix-blend-screen opacity-40"
+          className="absolute top-[10%] left-[-10%] w-[1200px] h-[800px] bg-[#00A8E8]/60 rounded-[100%] blur-[100px] mix-blend-screen"
           animate={{ 
-            scale: [1, 1.05, 1],
-            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.8, 0.5],
             rotate: [0, 5, 0]
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
@@ -91,10 +91,10 @@ const Capabilities = () => {
         
         <motion.div 
           style={{ y: y2 }}
-          className="absolute bottom-[20%] right-[-10%] w-[1000px] h-[800px] bg-[#00A8E8]/15 rounded-[100%] blur-[130px] mix-blend-screen opacity-30"
+          className="absolute bottom-[20%] right-[-10%] w-[1000px] h-[800px] bg-[#005B96]/70 rounded-[100%] blur-[120px] mix-blend-screen"
           animate={{ 
             scale: [1, 1.1, 1],
-            opacity: [0.1, 0.3, 0.1],
+            opacity: [0.6, 0.9, 0.6],
             rotate: [0, -5, 0]
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
@@ -102,9 +102,9 @@ const Capabilities = () => {
         
         {/* Liquid surface reflection overlay */}
         <motion.div 
-          className="absolute inset-0 mix-blend-overlay opacity-20"
+          className="absolute inset-0 mix-blend-overlay opacity-60"
           style={{
-            background: "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 60%)",
+            background: "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.7) 0%, transparent 60%)",
             y: y2
           }}
         />

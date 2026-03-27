@@ -83,29 +83,29 @@ const EquipmentPreview = () => {
       {/* ── EARTH ELEMENT BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Deep earthy base */}
-        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#1A1512] via-[#0D0B0A] to-black opacity-90" />
+        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#2A1810] via-[#150D0A] to-black opacity-100" />
         
         {/* SVG Noise Grain (High frequency stone texture) */}
         <svg className="absolute w-0 h-0">
           <filter id="stoneTexture">
             <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-            <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.05 0" />
+            <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.1 0" />
           </filter>
         </svg>
-        <div className="absolute inset-0 opacity-[0.25] mix-blend-overlay" style={{ filter: 'url(#stoneTexture)' }} />
+        <div className="absolute inset-0 opacity-[0.5] mix-blend-overlay" style={{ filter: 'url(#stoneTexture)' }} />
 
         {/* Floating dust/debris (Slow earthy blobs) */}
         <motion.div 
           style={{ y: y1 }}
-          className="absolute top-[20%] left-[5%] w-[800px] h-[600px] bg-[#8D6E63]/15 rounded-full blur-[150px] mix-blend-screen opacity-40"
+          className="absolute top-[20%] left-[5%] w-[800px] h-[600px] bg-[#8D6E63]/40 rounded-full blur-[100px] mix-blend-screen"
         />
         <motion.div 
           style={{ y: y2 }}
-          className="absolute bottom-[10%] right-[10%] w-[1000px] h-[500px] bg-[#D7CCC8]/10 rounded-full blur-[140px] mix-blend-screen opacity-30"
+          className="absolute bottom-[10%] right-[10%] w-[1000px] h-[500px] bg-[#D7CCC8]/30 rounded-full blur-[100px] mix-blend-screen"
         />
         
         {/* Warm horizon glow */}
-        <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#8D6E63]/10 to-transparent mix-blend-screen" />
+        <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[#8D6E63]/40 to-transparent mix-blend-screen" />
       </div>
       {/* ── Section Header ─────────────────────────────── */}
       <motion.div

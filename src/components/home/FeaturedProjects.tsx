@@ -55,25 +55,25 @@ const FeaturedProjects = () => {
       {/* ── FIRE ELEMENT BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Deep background heat */}
-        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#FF6B35]/5 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[#FF6B35]/30 via-transparent to-transparent" />
         
         {/* Animated glowing embers/heat blobs */}
         <motion.div 
           style={{ y: y1 }}
-          className="absolute -bottom-[20%] left-[10%] w-[800px] h-[800px] bg-[#FF8C42]/10 rounded-full blur-[120px] mix-blend-screen"
+          className="absolute -bottom-[20%] left-[10%] w-[800px] h-[800px] bg-[#FF5500]/50 rounded-full blur-[100px] mix-blend-screen"
           animate={{ 
             scale: [1, 1.1, 1],
-            opacity: [0.3, 0.6, 0.3],
+            opacity: [0.6, 0.9, 0.6],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         
         <motion.div 
           style={{ y: y2 }}
-          className="absolute -bottom-[30%] right-[10%] w-[600px] h-[600px] bg-[#FF6B35]/15 rounded-full blur-[100px] mix-blend-screen"
+          className="absolute -bottom-[30%] right-[10%] w-[600px] h-[600px] bg-[#FF3300]/60 rounded-full blur-[80px] mix-blend-screen"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.2, 0.5, 0.2],
+            opacity: [0.5, 0.8, 0.5],
             x: [0, 50, 0]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
@@ -81,15 +81,15 @@ const FeaturedProjects = () => {
         
         <motion.div 
           style={{ y: y3 }}
-          className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-[#FF8C42]/5 rounded-[100%] blur-[150px] mix-blend-screen"
+          className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-[#FF6B35]/40 rounded-[100%] blur-[120px] mix-blend-screen"
           animate={{ 
-            opacity: [0.1, 0.3, 0.1],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         
         {/* Film grain overlay for cinematic feel over the fire */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
+        <div className="absolute inset-0 opacity-[0.08] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
       </div>
 
       <div className="max-w-[1600px] mx-auto relative z-10">

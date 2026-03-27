@@ -35,18 +35,18 @@ const ContactCTA = () => {
         {/* Deep space nebula gradients */}
         <motion.div 
           style={{ y: y1 }}
-          className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#3D3D5C]/30 rounded-full blur-[120px] mix-blend-screen"
+          className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#3D3D5C]/60 rounded-full blur-[100px] mix-blend-screen"
         />
         <motion.div 
           style={{ y: y2 }}
-          className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] mix-blend-screen"
+          className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/40 rounded-full blur-[100px] mix-blend-screen"
         />
         
         {/* Static Starfield (using CSS radial gradients for massive performance) */}
         <div 
-          className="absolute inset-0 opacity-40 mix-blend-screen"
+          className="absolute inset-0 opacity-80 mix-blend-screen"
           style={{
-            backgroundImage: "radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 160px 120px, rgba(202,160,46,0.8), rgba(0,0,0,0))",
+            backgroundImage: "radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 160px 120px, rgba(202,160,46,1), rgba(0,0,0,0))",
             backgroundSize: "200px 200px"
           }}
         />
@@ -56,14 +56,14 @@ const ContactCTA = () => {
           className="absolute inset-[-50%] mix-blend-screen"
           style={{
             y: y3,
-            backgroundImage: "radial-gradient(1.5px 1.5px at 50px 150px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 150px 50px, rgba(202,160,46,0.5), rgba(0,0,0,0))",
+            backgroundImage: "radial-gradient(1.5px 1.5px at 50px 150px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 150px 50px, rgba(202,160,46,0.8), rgba(0,0,0,0))",
             backgroundSize: "300px 300px"
           }}
-          animate={{ opacity: [0.2, 0.6, 0.2] }}
+          animate={{ opacity: [0.4, 0.9, 0.4] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
         
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
+        <div className="absolute inset-0 opacity-[0.08] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
         
         {/* Center vignette to pull focus to text */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0A0A0D_80%)] opacity-80" />

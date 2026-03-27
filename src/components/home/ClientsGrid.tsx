@@ -45,14 +45,14 @@ const ClientsGrid = () => {
       {/* ── AIR ELEMENT BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
          {/* Subtle sky gradient base */}
-         <div className="absolute inset-0 bg-gradient-to-br from-[#E0F7FA]/5 via-transparent to-[#B3E5FC]/5 opacity-30" />
+         <div className="absolute inset-0 bg-gradient-to-br from-[#E0F7FA]/20 via-transparent to-[#B3E5FC]/20 opacity-80" />
          
          {/* Drifting Mist Clouds via blurred blobs */}
          <motion.div 
            style={{ x: x1 }}
-           className="absolute top-[10%] left-[-20%] w-[1200px] h-[600px] bg-[#E0F7FA]/10 rounded-full blur-[140px] mix-blend-screen opacity-50"
+           className="absolute top-[10%] left-[-20%] w-[1200px] h-[600px] bg-[#E0F7FA]/40 rounded-full blur-[100px] mix-blend-screen"
            animate={{ 
-             opacity: [0.3, 0.6, 0.3],
+             opacity: [0.5, 0.8, 0.5],
              scale: [1, 1.1, 1],
            }}
            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
@@ -60,9 +60,9 @@ const ClientsGrid = () => {
          
          <motion.div 
            style={{ x: x2 }}
-           className="absolute bottom-[20%] right-[-20%] w-[1000px] h-[800px] bg-[#B3E5FC]/10 rounded-full blur-[160px] mix-blend-screen opacity-40"
+           className="absolute bottom-[20%] right-[-20%] w-[1000px] h-[800px] bg-[#B3E5FC]/50 rounded-full blur-[120px] mix-blend-screen"
            animate={{ 
-             opacity: [0.2, 0.5, 0.2],
+             opacity: [0.5, 0.8, 0.5],
              scale: [1, 1.05, 1],
            }}
            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -70,16 +70,16 @@ const ClientsGrid = () => {
          
          {/* Additional slow floating cloud in center */}
          <motion.div 
-           className="absolute top-[40%] left-[30%] w-[800px] h-[400px] bg-white/5 rounded-[100%] blur-[100px] mix-blend-screen opacity-30"
+           className="absolute top-[40%] left-[30%] w-[800px] h-[400px] bg-white/20 rounded-[100%] blur-[90px] mix-blend-screen"
            animate={{ 
              y: [-20, 20, -20],
-             opacity: [0.2, 0.4, 0.2],
+             opacity: [0.4, 0.7, 0.4],
            }}
            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
          />
          
          {/* Film grain overlay for atmospheric texture */}
-         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
+         <div className="absolute inset-0 opacity-[0.08] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
       </div>
 
       {/* ── Section Header ─────────────────────────────────── */}
