@@ -29,21 +29,13 @@ const ClientsGrid = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="clients-grid" className="w-full overflow-hidden bg-background">
-
-      <style>{`
-        @keyframes ucMarquee {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-33.3333%); }
-        }
-        .uc-marquee {
-          display: flex;
-          width: max-content;
-          animation: ucMarquee 28s linear infinite;
-          will-change: transform;
-        }
-        .uc-marquee:hover { animation-play-state: paused; }
-      `}</style>
+    <section id="clients-grid" className="w-full overflow-hidden bg-black relative py-32 md:py-48 z-10">
+      
+      {/* ── Ambient Background Texture ────────────────────────── */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-zinc-800/20 blur-[150px] rounded-full" />
+        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full" />
+      </div>
 
       {/* ── Section Header ─────────────────────────────────── */}
       <motion.div
@@ -51,82 +43,62 @@ const ClientsGrid = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className="max-w-[1400px] mx-auto px-8 md:px-16 pt-24 md:pt-36 pb-14 flex items-center gap-6"
+        className="max-w-[1400px] mx-auto px-8 md:px-16 pb-16 relative z-10 flex flex-col gap-6"
       >
-        <div className="w-10 h-[1px] bg-primary shrink-0" />
-        <span className="text-[11px] tracking-[0.55em] uppercase text-primary/70 font-semibold font-body">
-          Industries &amp; Clients
-        </span>
-        <div className="flex-1 h-[1px] bg-primary/10" />
+        <div className="flex items-center gap-6">
+          <div className="w-10 h-[1px] bg-primary/40" />
+          <span className="text-[11px] tracking-[0.55em] uppercase text-zinc-500 font-bold">
+            Industries & Clients
+          </span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-light text-[#F5F5F5] tracking-tight">
+          Who we <span className="italic font-display text-transparent bg-clip-text bg-gradient-to-br from-primary/80 to-primary drop-shadow-[0_0_15px_rgba(212,189,114,0.3)]">work with.</span>
+        </h2>
       </motion.div>
 
-      {/* ── Marquee Ticker ──────────────────────────────────── */}
-      <div className="relative w-full overflow-hidden pb-16 md:pb-24">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-background to-transparent" />
-
-        <div className="uc-marquee select-none items-center">
-          {tickerItems.map((item, idx) => (
-            <div key={`${item.name}-${idx}`} className="flex items-center shrink-0">
-              <span
-                className="font-display font-black uppercase tracking-tight leading-none px-8 md:px-12 text-primary/[0.18]"
-                style={{ fontSize: "clamp(3rem, 6.5vw, 6rem)" }}
-              >
-                {item.name}
-              </span>
-              <span className="text-primary/30 text-3xl">&nbsp;·&nbsp;</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Cinematic Grid ──────────────────────────────────── */}
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 pb-32 md:pb-48">
+      {/* ── Cinematic Staggered Grid ────────────────────────── */}
+      <div className="max-w-[1400px] mx-auto px-8 md:px-16 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-primary/10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10"
         >
-          {industries.map((item) => (
+          {industries.map((item, idx) => (
             <motion.div
               key={item.name}
               variants={cardVariants}
               onClick={() => navigate("/work")}
-              className="group relative flex flex-col justify-between bg-background overflow-hidden cursor-pointer min-h-[300px] p-10 md:p-12"
+              className={`group relative flex flex-col justify-end bg-zinc-950 overflow-hidden cursor-pointer p-10 md:p-12 aspect-[4/3] border border-white/5 ${
+                idx % 2 === 1 ? 'lg:translate-y-12' : '' // Staggered layout for alternating items
+              }`}
             >
-              {/* Gold ambient hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 bg-gradient-to-br from-primary/[0.06] to-transparent" />
+              {/* Background Ambient Glow */}
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent z-0 pointer-events-none" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-1000 bg-primary z-0 pointer-events-none" />
+              
+              {/* Sweep Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none z-10">
+                <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 group-hover:animate-sweep" />
+              </div>
 
               {/* Large background number */}
-              <span className="font-display font-black leading-none select-none text-primary/[0.07] group-hover:text-primary/[0.13] transition-colors duration-700 tracking-tighter"
-                    style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}>
+              <span className="absolute top-8 right-8 font-display font-medium leading-none select-none text-zinc-800/10 group-hover:text-primary/10 transition-colors duration-700 tracking-tighter text-6xl md:text-8xl z-0">
                 {item.num}
               </span>
 
-              {/* Bottom label block */}
-              <div className="flex flex-col gap-3 mt-auto relative z-10">
-                {/* Gold accent line — expands on hover */}
-                <div className="h-[1.5px] bg-primary/40 w-8 group-hover:w-16 group-hover:bg-primary transition-all duration-700 ease-out rounded-full" />
-
-                {/* Industry name */}
-                <h3 className="font-display text-2xl md:text-3xl tracking-[0.18em] uppercase text-foreground/60 group-hover:text-foreground transition-colors duration-500 leading-tight">
+              {/* Foreground Content */}
+              <div className="relative z-20 flex flex-col gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="text-2xl md:text-3xl font-light text-[#F5F5F5] group-hover:text-white transition-colors duration-500 tracking-wide">
                   {item.name}
                 </h3>
-
-                {/* Micro-copy — slides up on hover */}
-                <div className="overflow-hidden max-h-0 group-hover:max-h-8 transition-all duration-700 ease-out opacity-0 group-hover:opacity-100">
-                  <span className="text-[9px] tracking-[0.5em] uppercase text-primary/75 font-medium font-body">
-                    {item.copy}
-                  </span>
-                </div>
+                <div className="w-8 h-px bg-primary/40 group-hover:bg-primary group-hover:w-16 transition-all duration-500" />
+                <span className="text-[10px] tracking-[0.3em] uppercase text-zinc-500 font-bold group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100 duration-500">
+                  {item.copy}
+                </span>
               </div>
 
-              {/* Bottom glow border */}
-              <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/50 transition-all duration-1000" />
-              {/* Corner bracket */}
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-primary/0 group-hover:border-primary/40 transition-all duration-700" />
             </motion.div>
           ))}
         </motion.div>

@@ -94,13 +94,13 @@ const FeaturedProjects = () => {
         >
           <button
             onClick={() => navigate("/work")}
-            className="group flex items-center gap-4 text-white/60 hover:text-white transition-all duration-300"
+            className="group flex items-center gap-4 text-[#F5F5F5]/60 hover:text-[#F5F5F5] transition-all duration-300"
           >
-            <span className="text-xs md:text-sm tracking-[0.5em] uppercase font-medium">
-              View All Work
+            <span className="text-xs md:text-sm tracking-[0.5em] uppercase font-bold">
+              View All Archive
             </span>
-            <div className="w-10 h-[1px] bg-white/20 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
-            <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-500" />
+            <div className="w-10 h-[2px] bg-primary/20 group-hover:w-16 group-hover:bg-primary transition-all duration-500" />
+            <ArrowRight size={18} className="text-primary group-hover:translate-x-2 transition-transform duration-500" />
           </button>
         </motion.div>
       </div>
