@@ -59,13 +59,33 @@ const Capabilities = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="capabilities" className="w-full bg-black py-0 overflow-hidden">
+    <section id="capabilities" className="w-full bg-black py-32 md:py-48 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-8 mb-16 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col gap-6"
+        >
+          <div className="flex items-center gap-6">
+            <div className="w-10 h-[1px] bg-primary/40" />
+            <span className="text-[11px] tracking-[0.55em] uppercase text-[#F5F5F5]/60 font-bold">
+              Capabilities
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-light text-[#F5F5F5] tracking-tight">
+            From Concept <span className="italic font-display text-transparent bg-clip-text bg-gradient-to-br from-primary/80 to-primary drop-shadow-[0_0_15px_rgba(212,189,114,0.3)]">to Screen.</span>
+          </h2>
+        </motion.div>
+      </div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full border-t border-white/5"
       >
         {capabilities.map((cap) => (
           <motion.div
@@ -94,7 +114,7 @@ const Capabilities = () => {
               {/* Decorative Line */}
               <div className="w-8 h-[2px] bg-primary/40 group-hover:w-16 group-hover:bg-primary transition-all duration-700 mb-6" />
               
-              <h3 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase text-white/60 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-700 leading-none">
+              <h3 className="font-display text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase text-[#F5F5F5]/60 group-hover:text-[#F5F5F5] group-hover:drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-700 leading-none font-bold">
                 {cap.label}
               </h3>
 

@@ -112,6 +112,10 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        sweep: {
+          "0%": { transform: "translateX(-100%) skewX(12deg)" },
+          "100%": { transform: "translateX(200%) skewX(12deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -122,6 +126,7 @@ export default {
         "slide-in-right": "slide-in-right 0.5s ease-out",
         shimmer: "shimmer 3s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
+        sweep: "sweep 1s ease-in-out forwards",
       },
     },
   },

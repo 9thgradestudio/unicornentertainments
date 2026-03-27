@@ -78,12 +78,15 @@ const EquipmentPreview = () => {
         className="max-w-[1400px] mx-auto px-8 md:px-16 pt-24 md:pt-36 pb-14"
       >
         {/* Eyebrow */}
-        <div className="flex items-center gap-5 mb-6">
-          <div className="w-10 h-[1px] bg-primary" />
-          <span className="text-[11px] tracking-[0.55em] uppercase text-primary/70 font-semibold font-body">
+        <div className="flex items-center gap-6 mb-6">
+          <div className="w-10 h-[1px] bg-primary/40" />
+          <span className="text-[11px] tracking-[0.55em] uppercase text-zinc-500 font-bold">
             Equipment
           </span>
         </div>
+        <h2 className="text-4xl md:text-5xl font-light text-[#F5F5F5] tracking-tight">
+          Premium <span className="italic font-display text-transparent bg-clip-text bg-gradient-to-br from-primary/80 to-primary drop-shadow-[0_0_15px_rgba(212,189,114,0.3)]">gear.</span>
+        </h2>
       </motion.div>
 
       {/* ── Bento Staggered Grid ────────────────────────── */}
@@ -149,25 +152,8 @@ const EquipmentPreview = () => {
         </motion.div>
       </div>
 
-      {/* ── CTA ─────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className="flex justify-center pb-32 md:pb-48"
-      >
-        <button
-          onClick={() => navigate("/equipment")}
-          className="group relative flex items-center gap-4 px-10 py-4 border border-primary/40 text-primary hover:border-primary transition-all duration-700 overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-primary/10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 ease-out" />
-          <span className="relative z-10 font-display text-sm tracking-[0.5em] uppercase">
-            Explore the Gear
-          </span>
-          <div className="relative z-10 w-6 h-[1px] bg-primary group-hover:w-10 transition-all duration-700" />
-        </button>
-      </motion.div>
+      {/* ── Actionless Bottom Spacing ────────────────────────── */}
+      <div className="pb-32 md:pb-48" />
     </section>
   );
 };

@@ -10,9 +10,10 @@ import FilmGrain from "./components/FilmGrain";
 import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Projects from "./pages/Projects";
+import Work from "./pages/Work";
 import Services from "./pages/Services";
 import Equipment from "./pages/Equipment";
+import CustomCursor from "./components/CustomCursor";
 
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <CustomCursor />
       <BrowserRouter>
         <ScrollToTop />
         <FilmGrain />
@@ -32,7 +34,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route path="/work" element={<Work />} />
             <Route path="/services" element={<Services />} />
             <Route path="/equipment" element={<Equipment />} />
             

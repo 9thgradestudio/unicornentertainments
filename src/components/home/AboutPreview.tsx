@@ -17,11 +17,11 @@ const AboutPreview = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
         <AnimatedSection>
           <p className="text-xs tracking-[0.3em] uppercase text-primary mb-4">About Us</p>
-          <h2 className="cinema-heading text-foreground mb-6">
+          <h2 className="text-4xl md:text-7xl tracking-tightest font-bold text-[#F5F5F5] mb-6 uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.05)]">
             An Official Movie<br />
-            <span className="text-gold-gradient">Production Company</span>
+            <span className="italic font-display text-transparent bg-clip-text bg-gradient-to-br from-primary/80 to-primary">Production Company</span>
           </h2>
-          <p className="font-serif italic text-muted-foreground mb-8 text-lg">
+          <p className="font-serif italic text-[#F5F5F5]/60 mb-8 text-lg md:text-xl tracking-wide">
             Film Making · Event Management · Photography · Post Production
           </p>
           <Link
